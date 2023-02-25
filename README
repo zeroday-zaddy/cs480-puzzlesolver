@@ -1,0 +1,60 @@
+A file named puzzle.in will be read:
+ -1st two number are w x h dimensions
+ -next number is the type 1 = BFS, 2 = DFS
+ -The next numbers are the tiles from left to right top to bottom 
+  -with -1 as the blank
+
+The given sample problem is seems to take long even with BFS
+
+simple problems are given as an example in puzzle.in
+program only read 1st problem, you can rearrange to read others
+
+how to compile:
+make will complile this
+
+analysis:
+ -BFS will find the shortest solution given there is one in a reasonable time compared to DFS
+ -DFS can end up going down a long a fruitless route before it considers other path a given level
+  -from the way my program is set up it will try moving
+   various states' blank spot to the left, down, right, then up
+    -it tries pushing those states in that prioirty to an extreme
+  -even with skipping visited states DFS is not good with a large solution space
+ 
+
+here is sample input:
+3 3 2
+
+1  2  3
+4  5  6
+7  8 -1
+
+1  2  3
+4  5  6
+-1  7 8
+and it's  output:
+start
+ 1  2  3 
+ 4  5  6 
+ 7  8    
+
+goal
+ 1  2  3 
+ 4  5  6 
+    7  8 
+
+
+steps
+ 1  2  3 
+ 4  5  6 
+ 7  8    
+
+ 1  2  3 
+ 4  5  6 
+ 7     8 
+
+ 1  2  3 
+ 4  5  6 
+    7  8
+
+
+
