@@ -3,6 +3,7 @@
 
 
 #include <vector>
+#include <list>
 #include <string>
 #include <iostream>
 #include <algorithm>
@@ -17,15 +18,17 @@
  * The next numbers are the tiles from left to right top to bottom 
  * with -1 as the blank
 */
-class PuzzleReader{
 
+class PuzzleReader{
 public:
-    static Solver read(std::istream& in){
-        
+    
+    static std::list<Solver*> solvers;
+    template <class S>
+    static Solver* read(std::istream& in){
         int w, h;
         in >> w;
         in >> h;
-        int type;
+        std::string type;
         in >> type;
 
         std::vector<int> board (w*h, 0);
@@ -39,9 +42,17 @@ public:
         }
         Puzzle goal {board, w, h};
 
-        Solver solver {start,goal};
-        if(type == 2) solver.search = solver.DFS;
-        return solver;
+        Solver* solver = new S{start,goal};
+        
+        return solver;//need to make better factory class
+    }
+    static bool deleteSolver(Solver* solver){
+        auto pos = std::find(solvers.begin(), solvers.end(), solver);
+        if(pos != solvers.end()){
+            delete solver;
+            solvers.erase(pos);
+        }
+        return pos != solvers.end();
     }
 };
 

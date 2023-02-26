@@ -10,12 +10,9 @@
 #include "puzzle_tree.h"
 
 class Solver{
-
+protected:
     //past states seen
     std::unordered_set<Puzzle, PuzzleHash> visited;
-    
-    //curren states observing
-    std::list<PuzzleNode*> fringe;
 
     Puzzle start;
     Puzzle goal;
@@ -29,20 +26,23 @@ class Solver{
     int currentLevel = -1;
 
 public:
-    //type of search to use
-    enum SearchType {BFS, DFS};
-    SearchType search;
 
-    //start stae to end state
-    Solver(Puzzle start, Puzzle goal)
-    : start(start), goal(goal), search(BFS){
-        visited.reserve(9*8*7*6*5*4*3*2*1);
-        paths.root = new PuzzleNode(new Puzzle{start});
-        //shouldnt reach load balance of over .5 often
-        
-        visited.insert(*(paths.root->value));
-        fringe.push_back(paths.root);
-    }
+    //start state to end state
+    Solver(Puzzle start, Puzzle goal);
+    virtual ~Solver() {
+        std::queue<PuzzleNode*> nodes;
+        nodes.push(paths.root);
+        while(!nodes.empty()){
+            PuzzleNode* n = nodes.front();
+            nodes.pop();
+            if(n == 0) continue;
+            for(int i = 0; i < 4; i++){
+                nodes.push(n->children[i]);
+            }
+            delete n->value;
+            delete n;
+        }
+    };
 
     //for debugging
     std::pair<Puzzle,Puzzle> getStartAndGoal(){ return {start, goal}; }
@@ -57,14 +57,15 @@ public:
     void setIfGoal(PuzzleNode* pn);
 
     //checks if goalNode has been set
-    bool goalFound();
+    bool goalFound(){
+        return goalNode != 0;
+    }
 
     //prints solution path from start state to given node
     std::list<Puzzle*> retrace(PuzzleNode* pn);
     
-    //logic to switch between BFS or DFS
-    PuzzleNode*  popFringe();
-    void pushFringe(PuzzleNode* pn);
+    virtual PuzzleNode*  popFringe() = 0;
+    virtual void pushFringe(PuzzleNode* pn) = 0;
 };
 
 #endif

@@ -21,4 +21,4 @@ $(TARGET): $(MAINOBJS)
 	$(LINK) $(FLAGS) -o $(TARGET) $^
 
 clean:
-	rm -rf *.o $(TARGET)
+	rm -rf *.o *.d $(TARGET)
