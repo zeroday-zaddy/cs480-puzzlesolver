@@ -3,11 +3,12 @@
 #include "reader.h"
 #include "puzzle.h"
 #include "uniform_cost_search.h"
+#include "informed_search.h"
 #include <fstream>
 int main(int argc, char** argv){
     
     std::ifstream ifs ("puzzle.in");
-    Solver* solver = PuzzleReader::read<UniformCostSearch>(ifs);
+    Solver* solver = PuzzleReader::read<InformedSearch>(ifs);
 
     //solver.search = solver.DFS;
     auto startgoal = solver->getStartAndGoal(); 

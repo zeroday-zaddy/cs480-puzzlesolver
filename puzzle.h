@@ -53,6 +53,11 @@ public:
 
 
     size_t hash() const;
+
+    int operator[](int i) const {return slots[i];}
+    int& operator[](int i) {return slots[i];}
+
+    
 };
 
 std::ostream& operator<<(std::ostream& out, const Puzzle& p);

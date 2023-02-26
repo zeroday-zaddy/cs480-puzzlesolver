@@ -14,8 +14,8 @@ protected:
     //past states seen
     std::unordered_set<Puzzle, PuzzleHash> visited;
 
-    Puzzle start;
-    Puzzle goal;
+     Puzzle start;
+     Puzzle goal;
 
     //null pointer for unsolved
     PuzzleNode* goalNode = 0;
@@ -45,7 +45,7 @@ public:
     };
 
     //for debugging
-    std::pair<Puzzle,Puzzle> getStartAndGoal(){ return {start, goal}; }
+    std::pair<const Puzzle&, const Puzzle&> getStartAndGoal() const { return {start, goal}; }
 
     //observe possible  solution step by step
     void step();
