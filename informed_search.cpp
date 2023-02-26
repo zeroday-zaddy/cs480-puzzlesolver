@@ -9,12 +9,6 @@
 #include "informed_search.h"
 
 
-// start state to end state
-InformedSearch::InformedSearch(Puzzle start, Puzzle goal, HeuristicType heuristic)
-    : Solver(start, goal), fringe(HeuristicFunction(this, heuristic)){
-    fringe.push(paths.root);
-}
-
 PuzzleNode*  InformedSearch::popFringe() {
     PuzzleNode* pn = fringe.top();
     fringe.pop();
@@ -23,4 +17,18 @@ PuzzleNode*  InformedSearch::popFringe() {
 
 void InformedSearch::pushFringe(PuzzleNode* pn) {
     fringe.push(pn);    
+}
+
+
+void InformedSearch::read(std::istream &in){
+    int heuristicFunction;
+    in >> heuristicFunction;
+
+    HeuristicType type = (HeuristicType)heuristicFunction;
+    Solver::read(in);
+}
+
+void InformedSearch::init(){
+    Solver::init();
+    fringe.push(paths.root);
 }

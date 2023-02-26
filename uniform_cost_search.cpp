@@ -8,14 +8,6 @@
 
 
 PuzzleNode*  UniformCostSearch::popFringe()  {
-    // PuzzleNode* pn;
-    // if(search == BFS){
-    //     pn = fringe.front();
-    //     fringe.pop_front();                                    
-    // }else{
-    //     pn = fringe.back();
-    //     fringe.pop_back();    
-    // }
     PuzzleNode* pn = fringe.front();
     fringe.pop_front();
     return pn;
@@ -27,4 +19,18 @@ void UniformCostSearch::pushFringe(PuzzleNode* pn) {
     }else{
         fringe.push_front(pn);   
     }
+}
+
+
+void UniformCostSearch::read(std::istream &in){
+    std::string search;
+    in >> search;
+
+    SearchType type = (SearchType)((search == "DFS") ? 1 : 0);
+    Solver::read(in);
+}
+
+void UniformCostSearch::init(){
+    Solver::init();
+    fringe.push_back(paths.root);
 }

@@ -53,5 +53,3 @@ int HeuristicFunction::h2f(const Puzzle *puzzle, const Puzzle *goal) const{
     }
     return x;
 }
-
-

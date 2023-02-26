@@ -8,8 +8,10 @@
 int main(int argc, char** argv){
     
     std::ifstream ifs ("puzzle.in");
-    Solver* solver = PuzzleReader::read<InformedSearch>(ifs);
+    Solver* solver;
+    ifs >> solver;
 
+    solver->init();
     //solver.search = solver.DFS;
     auto startgoal = solver->getStartAndGoal(); 
     //std::cout << p;

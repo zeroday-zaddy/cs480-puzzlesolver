@@ -9,6 +9,9 @@
 Solver::Solver(Puzzle start, Puzzle goal)
     : start(start), goal(goal)
 {
+
+}
+void Solver::init(){
     visited.reserve(9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1);
     paths.root = new PuzzleNode(new Puzzle{start});
     // shouldnt reach load balance of over .5 often
@@ -101,4 +104,24 @@ std::list<Puzzle*> Solver::retrace(PuzzleNode *pn)
         // std::cout << *pn->value;
     }
     return path;
+}
+
+
+
+void Solver::read(std::istream &in){
+    int w, h;
+    in >> w;
+    in >> h;
+    std::vector<int> board (w*h, 0);
+    for(int i = 0; i <  board.size(); i++){
+        in >> board[i];
+    }
+    Puzzle start {board, w, h};
+
+    for(int i = 0; i <  board.size(); i++){
+        in >> board[i];
+    }
+    Puzzle goal {board, w, h};
+    this->start =start;
+    this->goal = goal;
 }

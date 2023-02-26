@@ -18,6 +18,9 @@ public:
     
     std::vector<int> slots;
 
+    Puzzle() = default;
+
+     
     Puzzle(std::vector<int> _slots)
     : Puzzle(_slots, 3,3) { }
 

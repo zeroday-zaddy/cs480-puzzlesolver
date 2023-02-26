@@ -14,8 +14,8 @@ protected:
     //past states seen
     std::unordered_set<Puzzle, PuzzleHash> visited;
 
-     Puzzle start;
-     Puzzle goal;
+    Puzzle start;
+    Puzzle goal;
 
     //null pointer for unsolved
     PuzzleNode* goalNode = 0;
@@ -26,7 +26,7 @@ protected:
     int currentLevel = -1;
 
 public:
-
+    Solver() = default;
     //start state to end state
     Solver(Puzzle start, Puzzle goal);
     virtual ~Solver() {
@@ -43,6 +43,8 @@ public:
             delete n;
         }
     };
+
+    virtual void init();
 
     //for debugging
     std::pair<const Puzzle&, const Puzzle&> getStartAndGoal() const { return {start, goal}; }
@@ -66,6 +68,9 @@ public:
     
     virtual PuzzleNode*  popFringe() = 0;
     virtual void pushFringe(PuzzleNode* pn) = 0;
+
+    virtual void read(std::istream &in);
+    virtual Solver* clone() const = 0;
 };
 
 #endif
