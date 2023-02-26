@@ -13,7 +13,7 @@ class Puzzle{
 public:
     int width;
     int height;
-    static const int BLANK = -1;
+    static const int BLANK = 0;
     enum Move{up, right, down, left};
     
     std::vector<int> slots;

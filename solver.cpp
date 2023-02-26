@@ -116,12 +116,12 @@ void Solver::read(std::istream &in){
     for(int i = 0; i <  board.size(); i++){
         in >> board[i];
     }
-    Puzzle start {board, w, h};
+    Puzzle goal {board, w, h};
 
     for(int i = 0; i <  board.size(); i++){
         in >> board[i];
     }
-    Puzzle goal {board, w, h};
+    Puzzle start {board, w, h};
     this->start =start;
     this->goal = goal;
 }

@@ -24,11 +24,12 @@ void InformedSearch::read(std::istream &in){
     int heuristicFunction;
     in >> heuristicFunction;
 
-    HeuristicType type = (HeuristicType)heuristicFunction;
+    this->heuristic = (HeuristicType)(heuristicFunction -1);
     Solver::read(in);
 }
 
 void InformedSearch::init(){
     Solver::init();
+    fringe = Fringe(HeuristicFunction(this, heuristic));
     fringe.push(paths.root);
 }

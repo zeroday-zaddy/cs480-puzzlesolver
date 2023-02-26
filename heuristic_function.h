@@ -28,8 +28,8 @@ public:
 
     HeuristicFunction()
         : HeuristicFunction(0) {}
-    HeuristicFunction(Solver *solver, HeuristicType = h1)
-        : solver(solver) {}
+    HeuristicFunction(Solver *solver, HeuristicType heuristic = h1 )
+        : solver(solver), heuristic(heuristic){}
 
     bool operator()(const PuzzleNode *left, const PuzzleNode *right) const;
 

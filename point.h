@@ -14,6 +14,13 @@ struct Point{
     int flatten(int w){
         return (y*w) + x;
     }
+
+    bool operator==(const Point& r){
+        return x == r.x && y == r.y;
+    }
+    bool operator!=(const Point& r){
+        return ! (*this == r);
+    }
 };
 
 #endif
