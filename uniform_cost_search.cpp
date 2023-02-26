@@ -23,10 +23,11 @@ void UniformCostSearch::pushFringe(PuzzleNode* pn) {
 
 
 void UniformCostSearch::read(std::istream &in){
-    std::string search;
-    in >> search;
+    std::string searchstring;
+    in >> searchstring;
 
-    SearchType type = (SearchType)((search == "DFS") ? 1 : 0);
+    SearchType type = (SearchType)((searchstring == "DFS") ? 1 : 0);
+    this->search = type;
     Solver::read(in);
 }
 
